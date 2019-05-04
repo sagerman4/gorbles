@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [stateSrc, setStateSrc] = useState('')
+  const [refresh, setRefresh] = useState(false)
+
+  useEffect(() => {
+    async function fetchCats() {
+      const response = await fetch('https://api.thecatapi.com/v1/images/search')
+      const json = await response.json()
+      setStateSrc(json[0].url)
+    }
+
+    fetchCats()
+    setRefresh(false)
+  }, [refresh])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="img-container">
+        <h1>Cat Pics!!</h1>
+        <img
+          width={250}
+          alt="cat pics"
+          src={stateSrc}
+        />
+        <br/>
+        <button onClick={() => setRefresh(true)}>Refresh, son!</button>
+      </div>
     </div>
   );
 }
