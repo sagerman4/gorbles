@@ -29,7 +29,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://sagerman4.github.io/gorbles",
+  "homepage": "https://sagerman4.github.io/gorbles",
   "devDependencies": {
     "gh-pages": "^2.0.1"
   }
